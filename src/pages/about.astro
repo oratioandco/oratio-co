@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="About Tobias Treppmann" description="Learn about Tobias Treppmann, founder of Oratio&Co">
+  <Nav />
+
+  <!-- Main Content -->
+  <article style="max-width: 700px; margin: 0 auto; padding: 4rem 2rem;">
+    <h1>About Tobias Treppmann</h1>
+
+    <p>Tobias Treppmann is a product designer, theologian, and mentor helping churches and Christian organizations navigate change through strategic design and theological reflection.</p>
+
+    <h2>What He Does</h2>
+    <p>Tobias combines deep expertise in product design and human-centered innovation with a genuine passion for the global church. He believes that good design and theological depth don't have to be in tension—in fact, they strengthen each other.</p>
+
+    <p>His work focuses on:</p>
+    <ul>
+      <li><strong>Strategic Ministry Consulting</strong> — helping church leaders clarify their mission and operationalize their vision</li>
+      <li><strong>Design Thinking for Ministry</strong> — applying human-centered design principles to ministry challenges</li>
+      <li><strong>Digital Spiritual Formation</strong> — building products and platforms that foster genuine spiritual growth in community</li>
+      <li><strong>Missional Innovation</strong> — equipping churches to contextualize the gospel and thrive in rapidly changing contexts</li>
+    </ul>
+
+    <h2>Current Work</h2>
+    <p><strong>BibelTV:</strong> As a product designer, Tobias helps shape digital resources for Christian education and spiritual formation.</p>
+
+    <p><strong>Aperto:</strong> Founder and lead designer of Aperto (aperto.bible), a digital spiritual formation platform designed for meaningful Scripture engagement in community.</p>
+
+    <p><strong>Kairos University:</strong> Pursuing a Master of Arts in Missional Leadership, exploring the intersection of theology, culture, and organizational change.</p>
+
+    <p><strong>Oratio&Co:</strong> Founder and principal consultant, working with churches and ministry organizations on strategic design, theological reflection, and innovation.</p>
+
+    <h2>Speaking & Teaching</h2>
+    <p>Tobias is an invited speaker and workshop facilitator. Recent speaking includes:</p>
+    <ul>
+      <li>ICCM Europe 2023: "Navigating Fluid Contexts" and "Missional Design — Lean Startup for Churches"</li>
+      <li>Various church leadership conferences and ministry networks across Europe</li>
+    </ul>
+
+    <h2>Get in Touch</h2>
+    <p>Interested in exploring strategic design, missional innovation, or digital spiritual formation for your church or organization?</p>
+    <p style="margin-top: 1.5rem;">
+      <strong style="color: var(--color-dark);">Email:</strong> <a href="mailto:hello@treppmann.design">hello@treppmann.design</a><br/>
+      <strong style="color: var(--color-dark);">Explore:</strong> <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a> | <a href="https://aperto.bible" target="_blank" rel="noopener noreferrer">aperto.bible</a>
+    </p>
+  </article>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: var(--color-gray);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  ul {
+    margin-left: 1.5rem;
+    color: var(--color-gray);
+    line-height: 1.8;
+  }
+
+  li {
+    margin-bottom: 0.75rem;
+  }
+
+  strong {
+    color: var(--color-dark);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--color-blue);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

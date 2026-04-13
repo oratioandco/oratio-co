@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Ministry Model Canvas" description="A strategic planning framework for churches adapted from the Business Model Canvas">
+  <Nav />
+
+  <!-- Header Section -->
+  <section style="background: white; padding: 3rem 2rem; border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <h1>The Ministry Model Canvas for Churches</h1>
+      <p style="font-size: 1.1rem; color: var(--color-gray); margin-bottom: 0;">Adapted from The Business Model Canvas, the Ministry Model Canvas provides a strategic planning framework specifically designed for churches and ministries.</p>
+    </div>
+  </section>
+
+  <!-- Canvas Section -->
+  <section style="padding: 3rem 2rem;">
+    <div class="container">
+      <div class="canvas-wrapper">
+        <!-- Top Row -->
+        <div class="canvas-row-top">
+          <!-- Block 2: Connecting Factor -->
+          <div class="canvas-block block-2">
+            <div class="block-number">2</div>
+            <h3>Connecting Factor</h3>
+            <ul>
+              <li>Top 3 connecting factors (e.g. problems, needs, interests)</li>
+              <li>What unique, interest-based activities can we offer that align with our ministry's values and the interests of our target audience?</li>
+            </ul>
+          </div>
+
+          <!-- Block 5: Key Activities -->
+          <div class="canvas-block block-5">
+            <div class="block-number">5</div>
+            <h3>Key Activities</h3>
+            <ul>
+              <li>What are the primary activities required to connect with and serve our target audience effectively?</li>
+              <li>Which activities do we need to sustain this model long-term? (e.g. worship services, communication, events, training)</li>
+            </ul>
+          </div>
+
+          <!-- Block 3: Missional Identity -->
+          <div class="canvas-block block-3">
+            <div class="block-number">3</div>
+            <h3>Missional Identity</h3>
+            <ul>
+              <li>What really is the good news in our context?</li>
+              <li>How does our church reflect God's mission in the world?</li>
+              <li>What aspects of our ministry are particularly compelling to those in our particular context?</li>
+            </ul>
+          </div>
+
+          <!-- Block 4: Relationships -->
+          <div class="canvas-block block-4">
+            <div class="block-number">4</div>
+            <h3>Relationships</h3>
+            <ul>
+              <li>What type of relationship do they expect from us? (e.g. community, co-creation, accountability, self-service)</li>
+              <li>In what ways can we ensure our relational offerings are accessible and appealing to those new to faith?</li>
+            </ul>
+          </div>
+
+          <!-- Block 1: Target Audience -->
+          <div class="canvas-block block-1">
+            <div class="block-number">1</div>
+            <h3>Target Audience</h3>
+            <ul>
+              <li>Who is our most important target audience? (demographics, location, time, characteristics)</li>
+              <li>Which sub-groups exist? (e.g. families contain parents, kids, youth)</li>
+              <li>What role do faith and spirituality play in the target audience's lives?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Middle Row - Resources and Channels -->
+        <div class="canvas-row-middle">
+          <!-- Block 7: Resources -->
+          <div class="canvas-block block-7">
+            <div class="block-number">7</div>
+            <h3>Resources</h3>
+            <ul>
+              <li>Financial</li>
+              <li>Volunteers</li>
+              <li>Staff</li>
+              <li>Partnerships</li>
+              <li>Equipment/Technology/Materials</li>
+              <li>Location</li>
+            </ul>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">What existing relationships or networks can we leverage to connect with our target audience?</p>
+          </div>
+
+          <!-- Block 6: Channels -->
+          <div class="canvas-block block-6">
+            <div class="block-number">6</div>
+            <h3>Channels</h3>
+            <ul>
+              <li>Where and how will we reach the target audience?</li>
+              <li>What relationships do we already have, what relationships do we need to establish? (target audience, city, partner organizations)</li>
+              <li>What alternatives exist and are used by our target audience regarding connecting factors?</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Row -->
+        <div class="canvas-row-bottom">
+          <!-- Block 8: Budget -->
+          <div class="canvas-block block-8">
+            <div class="block-number">8</div>
+            <h3>Budget</h3>
+            <ul>
+              <li>Rent/Facilities</li>
+              <li>Salaries</li>
+              <li>Utilities</li>
+              <li>Communication</li>
+              <li>Technology</li>
+              <li>Materials & Supplies</li>
+              <li>Outreach</li>
+            </ul>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">What are the costs associated with sustaining our ministry model?</p>
+          </div>
+
+          <!-- Block 9: Assessing Missional Effectiveness -->
+          <div class="canvas-block block-9">
+            <div class="block-number">9</div>
+            <h3>Assessing Missional Effectiveness</h3>
+            <ul>
+              <li>How can we cultivate a posture of prayerful discernment and openness to the Holy Spirit as we assess our church's missional effectiveness?</li>
+              <li>How can we design SMART criteria that align with our church's God-given mission?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attribution -->
+      <div style="margin-top: 3rem; padding: 2rem; background: var(--color-light-gray); border-radius: 8px; text-align: center;">
+        <p style="font-size: 0.95rem; color: var(--color-gray); margin: 0;">
+          The Ministry Model Canvas is adapted from <a href="https://businessmodelgeneration.com" target="_blank" rel="noopener noreferrer">The Business Model Canvas</a> and is licensed under the Creative Commons Attribution-Share Alike 3.0 Un-ported License. For more information visit <strong>oratio.co</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .canvas-wrapper {
+    display: grid;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .canvas-row-top {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.25fr 1.25fr 0.75fr;
+    gap: 1rem;
+  }
+
+  .canvas-row-middle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .canvas-row-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .canvas-block {
+    background: white;
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .canvas-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at top left, var(--color-blue), transparent);
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  .block-number {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(131, 201, 236, 0.15);
+    line-height: 1;
+  }
+
+  .canvas-block h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    position: relative;
+    z-index: 1;
+  }
+
+  .canvas-block ul {
+    list-style: disc;
+    margin-left: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .canvas-block li {
+    margin-bottom: 0.5rem;
+  }
+
+  .canvas-block p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-gray);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .canvas-row-top {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .block-1 {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .block-2 {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .block-3 {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .block-4 {
+      grid-column: 1 / 3;
+      grid-row: 2;
+    }
+
+    .block-5 {
+      grid-column: 3;
+      grid-row: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .canvas-row-top,
+    .canvas-row-middle,
+    .canvas-row-bottom {
+      grid-template-columns: 1fr;
+    }
+
+    .block-1,
+    .block-2,
+    .block-3,
+    .block-4,
+    .block-5 {
+      grid-column: auto !important;
+      grid-row: auto !important;
+    }
+
+    .canvas-block {
+      min-height: 150px;
+      padding: 1.25rem;
+    }
+
+    .block-number {
+      font-size: 3rem;
+    }
+
+    .canvas-block h3 {
+      font-size: 1rem;
+    }
+
+    .canvas-block ul {
+      font-size: 0.85rem;
+    }
+  }
+</style>

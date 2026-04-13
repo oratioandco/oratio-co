@@ -1,0 +1,79 @@
+---
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/" class="logo">Oratio&Co</a>
+    <ul class="nav-links">
+      <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href="/missional-by-design" class={currentPath === '/missional-by-design' ? 'active' : ''}>Missional by Design</a></li>
+      <li><a href="/ministry-model-canvas" class={currentPath === '/ministry-model-canvas' ? 'active' : ''}>Ministry Model Canvas</a></li>
+      <li><a href="/about" class={currentPath === '/about' ? 'active' : ''}>About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: #83c6ec;
+  }
+
+  .nav-links a.active {
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .nav-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>
