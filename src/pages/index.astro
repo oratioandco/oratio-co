@@ -9,22 +9,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 >
   <!-- ═════════ HERO ═════════ -->
   <section class="hero" aria-label="Welcome">
-    <!-- Cinematic loop. Drop an mp4/webm into /public/hero.mp4 (and optionally hero.webm for better compression). -->
-    <video
-      class="hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      poster={`${base}/hero-poster.jpg`}
-      aria-hidden="true"
-    >
-      <source src={`${base}/hero.webm`} type="video/webm" />
-      <source src={`${base}/hero.mp4`} type="video/mp4" />
-    </video>
-    <!-- Static fallback shown to reduced-motion users and if video fails -->
-    <img class="hero-poster" src={`${base}/hero-poster.jpg`} alt="" aria-hidden="true" hidden />
+    <!-- Procedural WebGL-style wireframe rendered in Canvas 2D (no library) -->
+    <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true" role="presentation"></canvas>
 
     <div class="hero-meta" aria-hidden="true">
       <span>Strategic Design <span class="dot"></span> Ministry Innovation</span>
@@ -38,6 +24,180 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </p>
     </div>
   </section>
+
+  <script is:inline>
+    // ─── Procedural 3D wireframe orb, Canvas 2D, no dependencies ───
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { alpha: true });
+
+      // Palette (matches site CSS variables)
+      const COLOR_CREAM = 'rgba(246, 241, 231, 1)';
+      const COLOR_GOLD  = 'rgba(240, 231, 148, 1)';
+      const COLOR_BLUE  = 'rgba(131, 201, 236, 1)';
+
+      // ── Points on a sphere via Fibonacci lattice (even distribution) ──
+      const N_POINTS = 96;
+      const SPHERE_RADIUS = 1; // in normalized units; scaled at draw time
+      const points = [];
+      const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2;
+      for (let i = 0; i < N_POINTS; i++) {
+        const t = i / (N_POINTS - 1);
+        const inclination = Math.acos(1 - 2 * t);
+        const azimuth = 2 * Math.PI * i / GOLDEN_RATIO;
+        points.push({
+          x: Math.sin(inclination) * Math.cos(azimuth),
+          y: Math.sin(inclination) * Math.sin(azimuth),
+          z: Math.cos(inclination),
+          // deterministic accent: every 13th point gets a gold hue
+          accent: i % 13 === 0,
+        });
+      }
+
+      // ── Precompute connections (nearest-neighbor in 3D) ──
+      // For each point, connect to its 3 nearest — gives a clean wireframe shell
+      const connections = [];
+      for (let i = 0; i < points.length; i++) {
+        const dists = [];
+        for (let j = 0; j < points.length; j++) {
+          if (i === j) continue;
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const dz = points[i].z - points[j].z;
+          dists.push({ j, d: dx*dx + dy*dy + dz*dz });
+        }
+        dists.sort((a, b) => a.d - b.d);
+        for (let k = 0; k < 3; k++) {
+          const j = dists[k].j;
+          if (j > i) connections.push([i, j]); // avoid duplicate pairs
+        }
+      }
+
+      // ── Sizing / DPR ──
+      let width = 0, height = 0, scale = 1, dpr = window.devicePixelRatio || 1;
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        width = rect.width;
+        height = rect.height;
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        // Orb radius relative to viewport
+        scale = Math.min(width, height) * 0.38;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // ── Animation state ──
+      let rotY = 0, rotX = -0.35;
+      const rotYSpeed = 0.0018;   // rad per frame, very slow
+      const rotXSpeed = 0.00035;  // tiny wobble on X
+
+      // Projection focal length (higher = more orthographic, lower = more perspective)
+      const FOCAL = 2.2;
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function project(p) {
+        // rotate around Y
+        const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+        const x1 = p.x * cosY - p.z * sinY;
+        const z1 = p.x * sinY + p.z * cosY;
+        // rotate around X
+        const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+        const y2 = p.y * cosX - z1 * sinX;
+        const z2 = p.y * sinX + z1 * cosX;
+        // perspective project
+        const pers = FOCAL / (FOCAL - z2);
+        return {
+          sx: width / 2 + x1 * scale * pers,
+          sy: height / 2 + y2 * scale * pers,
+          z:  z2,
+          pers,
+        };
+      }
+
+      function render() {
+        // clear (transparent so CSS background shows)
+        ctx.clearRect(0, 0, width, height);
+
+        // project all points
+        const proj = points.map(project);
+
+        // ── Draw connections (edges) ──
+        ctx.lineWidth = 0.6;
+        for (let c = 0; c < connections.length; c++) {
+          const [i, j] = connections[c];
+          const a = proj[i], b = proj[j];
+          const avgZ = (a.z + b.z) * 0.5;
+          // opacity based on z depth: front = brighter, back = dim
+          const t = (avgZ + 1) * 0.5; // 0..1
+          const alpha = 0.08 + t * 0.34;
+          ctx.strokeStyle = `rgba(246, 241, 231, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(a.sx, a.sy);
+          ctx.lineTo(b.sx, b.sy);
+          ctx.stroke();
+        }
+
+        // ── Draw points (nodes) ──
+        for (let i = 0; i < points.length; i++) {
+          const p = points[i];
+          const pr = proj[i];
+          const t = (pr.z + 1) * 0.5;
+          const radius = 1.1 + t * 1.8;
+          const alpha = 0.2 + t * 0.75;
+          if (p.accent) {
+            // gold accent with soft halo
+            ctx.fillStyle = `rgba(240, 231, 148, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(pr.sx, pr.sy, radius * 1.4, 0, Math.PI * 2);
+            ctx.fill();
+            // inner glow
+            ctx.fillStyle = `rgba(240, 231, 148, ${Math.min(1, alpha + 0.25)})`;
+            ctx.beginPath();
+            ctx.arc(pr.sx, pr.sy, radius * 0.55, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            ctx.fillStyle = `rgba(246, 241, 231, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(pr.sx, pr.sy, radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        // advance rotation
+        if (!reducedMotion) {
+          rotY += rotYSpeed;
+          rotX = -0.35 + Math.sin(rotY * 0.3) * 0.12; // gentle wobble
+        }
+      }
+
+      let rafId;
+      function loop() {
+        render();
+        rafId = requestAnimationFrame(loop);
+      }
+
+      // For reduced motion: draw one static frame and stop
+      if (reducedMotion) {
+        render();
+      } else {
+        loop();
+      }
+
+      // Pause when tab is hidden (saves battery)
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (rafId) cancelAnimationFrame(rafId);
+        } else if (!reducedMotion) {
+          loop();
+        }
+      });
+    })();
+  </script>
 
   <!-- ═════════ MISSION STATEMENT ═════════ -->
   <section class="section section-mission">

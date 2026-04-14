@@ -226,25 +226,24 @@ p {
   isolation: isolate;
 }
 
-.hero-video,
-.hero-poster {
+.hero-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: -2;
+  display: block;
 }
 
-/* Subtle dark gradient for text legibility — weighted toward bottom-left */
+/* Subtle dark gradient only where the text sits, so the wireframe stays visible */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(to top, rgba(10, 26, 42, 0.7) 0%, rgba(10, 26, 42, 0.3) 40%, rgba(10, 26, 42, 0.15) 70%, rgba(10, 26, 42, 0.35) 100%),
-    linear-gradient(to right, rgba(10, 26, 42, 0.55) 0%, rgba(10, 26, 42, 0) 55%);
+    linear-gradient(to top, rgba(10, 26, 42, 0.55) 0%, rgba(10, 26, 42, 0.2) 35%, rgba(10, 26, 42, 0) 55%),
+    linear-gradient(to right, rgba(10, 26, 42, 0.4) 0%, rgba(10, 26, 42, 0) 55%);
   pointer-events: none;
 }
 
@@ -318,10 +317,6 @@ p {
   margin-top: 1.75rem;
 }
 
-/* Respect reduced motion: pause video, show poster instead */
-@media (prefers-reduced-motion: reduce) {
-  .hero-video { display: none; }
-}
 
 @media (max-width: 720px) {
   .hero { padding: 5rem 6vw 3rem; }
