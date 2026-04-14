@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EmailLink from '../../components/EmailLink.astro';
+
+// NOTE: Draft German copy — please review before going live.
+---
+
+<BaseLayout
+  lang="de"
+  title="Über Tobias Treppmann — Oratio&Co"
+  description="Über Tobias Treppmann, Gründer von Oratio&Co."
+>
+  <article style="max-width: 720px; margin: 0 auto; padding: 4rem 2rem;">
+    <h1>Über Tobias Treppmann</h1>
+
+    <p>
+      Tobias Treppmann ist Produktdesigner, Theologe und Mentor — und begleitet Gemeinden und christliche
+      Organisationen dabei, Wandel durch strategisches Design und theologische Reflexion zu navigieren.
+    </p>
+
+    <h2>Was er tut</h2>
+    <p>
+      Tobias verbindet tiefe Expertise in Produktdesign und menschzentrierter Innovation mit einer echten Leidenschaft
+      für die weltweite Kirche. Er ist überzeugt: Gutes Design und theologische Tiefe müssen nicht in Spannung stehen —
+      im Gegenteil, sie stärken sich gegenseitig.
+    </p>
+
+    <p>Seine Arbeit konzentriert sich auf:</p>
+    <ul>
+      <li><strong>Strategische Gemeindeberatung</strong> — Leitungsteams helfen, ihre Mission zu klären und ihre Vision umzusetzen</li>
+      <li><strong>Design Thinking für den Dienst</strong> — menschzentrierte Gestaltungsprinzipien auf Dienstfragen anwenden</li>
+      <li><strong>Digitale geistliche Formation</strong> — Produkte und Plattformen, die echtes geistliches Wachstum in Gemeinschaft fördern</li>
+      <li><strong>Missionale Innovation</strong> — Gemeinden befähigen, das Evangelium zu kontextualisieren und in fließenden Kontexten zu gedeihen</li>
+    </ul>
+
+    <h2>Aktuelle Arbeit</h2>
+    <p><strong>BibelTV:</strong> Als Produktdesigner gestaltet Tobias digitale Ressourcen für christliche Bildung und geistliche Formation.</p>
+    <p><strong>Aperto:</strong> Gründer und Lead Designer von Aperto (aperto.bible), einer digitalen Plattform für geistliche Formation und Bibelengagement in Gemeinschaft.</p>
+    <p><strong>Kairos University:</strong> Tobias absolviert derzeit seinen M.A. in Leadership.</p>
+
+    <h2>Kontakt</h2>
+    <p>Interesse an strategischem Design, missionaler Innovation oder digitaler geistlicher Formation für deine Gemeinde oder Organisation?</p>
+    <p style="margin-top: 1.5rem;">
+      <strong style="color: var(--color-dark);">E-Mail:</strong> <EmailLink /><br/>
+      <strong style="color: var(--color-dark);">Entdecken:</strong>
+      <a href="https://missional.design/de" target="_blank" rel="noopener noreferrer">missional.design</a>
+      | <a href="https://aperto.bible" target="_blank" rel="noopener noreferrer">aperto.bible</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  h1 { margin-bottom: 1.5rem; font-variation-settings: 'wdth' 135, 'opsz' 48; }
+  h2 { margin-top: 2.5rem; font-variation-settings: 'wdth' 130, 'opsz' 32; }
+  p  { font-variation-settings: 'wdth' 100, 'opsz' 14; margin-bottom: 1rem; line-height: 1.65; }
+  ul { margin-bottom: 1.5rem; padding-left: 1.5rem; line-height: 1.8; }
+</style>

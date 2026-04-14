@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  lang="de"
+  title="Missional by Design — Oratio&Co"
+  description="Missional by Design — Ein transformierender Ansatz für Gemeindeleitung."
+>
+  <article class="translation-stub">
+    <p class="eyebrow">Missional by Design</p>
+    <h1>Deutsche Übersetzung<br/>in Vorbereitung.</h1>
+    <p class="lead">
+      Dieser Artikel liegt derzeit nur auf Englisch vor. Die deutsche Übersetzung folgt bald.
+    </p>
+    <div class="actions">
+      <a class="cta-button" href={`${base}/missional-by-design`}>Read in English →</a>
+      <a class="cta-button-outline" href={`${base}/de`}>Zurück zur Startseite</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .translation-stub {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+  .translation-stub .eyebrow {
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 125, 'opsz' 14;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1.5rem;
+  }
+  .translation-stub h1 {
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 145, 'opsz' 72;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+  .translation-stub .lead {
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 110, 'opsz' 18;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    max-width: 55ch;
+    margin-bottom: 2.5rem;
+    opacity: 0.85;
+  }
+  .actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .actions a {
+    display: inline-block;
+    padding: 1rem 1.75rem;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 125, 'opsz' 14;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cta-button {
+    background: #0a1a2a;
+    color: #f6f1e7;
+  }
+  .cta-button-outline {
+    background: transparent;
+    color: #0a1a2a;
+    border: 1px solid #0a1a2a;
+  }
+  .cta-button:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(10, 26, 42, 0.15); }
+  .cta-button-outline:hover { background: #0a1a2a; color: #f6f1e7; }
+</style>

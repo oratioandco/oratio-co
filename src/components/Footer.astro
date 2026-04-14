@@ -1,12 +1,23 @@
 ---
 import EmailLink from './EmailLink.astro';
+import { t, type Locale } from '../i18n/ui';
+
+interface Props {
+  lang?: Locale;
+}
+const { lang = 'en' } = Astro.props;
+
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Legal pages are bilingual already (German first, English section below) — same URL for both locales
+const impressumHref = `${base}/impressum`;
+const datenschutzHref = `${base}/datenschutz`;
+const barrierefreiheitHref = `${base}/barrierefreiheit`;
 ---
 
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-main">
-      <p class="footer-text">Tobias Treppmann &nbsp;|&nbsp; <EmailLink /></p>
+      <p class="footer-text">{t(lang, 'footer.tagline')} &nbsp;|&nbsp; <EmailLink /></p>
       <div class="footer-links">
         <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a>
         <span class="separator">•</span>
@@ -14,13 +25,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </div>
     <div class="footer-legal">
-      <a href={`${base}/impressum`}>Impressum</a>
+      <a href={impressumHref}>{t(lang, 'footer.links.imprint')}</a>
       <span class="separator">•</span>
-      <a href={`${base}/datenschutz`}>Datenschutz</a>
+      <a href={datenschutzHref}>{t(lang, 'footer.links.privacy')}</a>
       <span class="separator">•</span>
-      <a href={`${base}/barrierefreiheit`}>Barrierefreiheit</a>
+      <a href={barrierefreiheitHref}>{t(lang, 'footer.links.accessibility')}</a>
     </div>
-    <p class="footer-credit">© 2026 Oratio&Co. All rights reserved.</p>
+    <p class="footer-credit">{t(lang, 'footer.credit')}</p>
   </div>
 </footer>
 
@@ -65,9 +76,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   .footer-text a:hover,
   .footer-links a:hover,
-  .footer-legal a:hover {
-    opacity: 0.6;
-  }
+  .footer-legal a:hover { opacity: 0.6; }
 
   .footer-links {
     font-size: 0.9rem;
