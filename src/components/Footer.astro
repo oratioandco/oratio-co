@@ -26,81 +26,79 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 <style>
   .footer {
-    background: #f9f9f9;
-    border-top: 1px solid #e0e0e0;
-    padding: 3rem 2rem;
-    margin-top: 4rem;
+    background: #0a1a2a;
+    color: #f6f1e7;
+    padding: clamp(3rem, 8vh, 5rem) 6vw;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 110, 'opsz' 14;
   }
 
   .footer-content {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
   }
 
   .footer-main {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(246, 241, 231, 0.15);
   }
 
   .footer-text {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 120, 'opsz' 14;
     font-size: 0.95rem;
-    color: #666;
-    margin: 0 0 0.5rem 0;
+    color: rgba(246, 241, 231, 0.85);
+    margin: 0 0 0.75rem 0;
   }
 
-  .footer-text a {
-    color: #83c6ec;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  .footer-text a,
+  .footer-links a,
+  .footer-legal a {
+    color: #f6f1e7;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: opacity 0.2s ease;
   }
 
-  .footer-text a:hover {
-    color: #1a1a1a;
+  .footer-text a:hover,
+  .footer-links a:hover,
+  .footer-legal a:hover {
+    opacity: 0.6;
   }
 
   .footer-links {
-    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
-  }
-
-  .footer-links a,
-  .footer-legal a {
-    color: #83c6ec;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .footer-links a:hover,
-  .footer-legal a:hover {
-    color: #1a1a1a;
+    font-weight: 500;
+    letter-spacing: 0.02em;
   }
 
   .footer-legal {
     text-align: center;
-    margin-top: 1.25rem;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: #888;
+    margin-top: 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(246, 241, 231, 0.6);
+    letter-spacing: 0.04em;
   }
 
   .separator {
-    color: #ccc;
+    color: rgba(246, 241, 231, 0.3);
     margin: 0 0.5rem;
   }
 
   .footer-credit {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    color: #999;
+    font-size: 0.8rem;
+    color: rgba(246, 241, 231, 0.5);
     text-align: center;
-    margin: 0;
+    margin: 1.5rem 0 0 0;
+    letter-spacing: 0.05em;
   }
 
   @media (max-width: 768px) {
     .footer {
-      padding: 2rem 1rem;
-      margin-top: 2rem;
+      padding: 2.5rem 6vw;
     }
   }
 </style>

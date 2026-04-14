@@ -21,54 +21,60 @@ const currentPath = new URL(Astro.request.url).pathname.replace(base, '') || '/'
 
 <style>
   .nav {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: rgba(246, 241, 231, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(10, 26, 42, 0.08);
     position: sticky;
     top: 0;
     z-index: 100;
   }
 
   .nav-container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.1rem 6vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .logo {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1a1a1a;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 140, 'opsz' 14;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: #0a1a2a;
     text-decoration: none;
   }
 
   .nav-links {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 2.25rem;
     margin: 0;
     padding: 0;
   }
 
   .nav-links a {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    color: #666;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    font-variation-settings: 'wdth' 120, 'opsz' 14;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #0a1a2a;
+    opacity: 0.7;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
   }
 
   .nav-links a:hover {
-    color: #83c6ec;
+    opacity: 1;
   }
 
   .nav-links a.active {
-    color: #1a1a1a;
-    font-weight: 600;
+    opacity: 1;
+    font-weight: 700;
   }
 
   .nav-external {

@@ -12,10 +12,11 @@ const churchSvg = fs.readFileSync(
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<BaseLayout title="Oratio&Co - Prayer & Innovation" description="Equipping churches and organizations to navigate fluid contexts through strategic design, theological reflection, and innovation">
-
-
-  <!-- Hero Section - left/right split with large SVG -->
+<BaseLayout
+  title="Oratio&Co — Strategic design &amp; innovation for ministries"
+  description="A strategic design consultancy for churches, ministries, and faith-driven teams navigating fluid contexts."
+>
+  <!-- ═════════ HERO ═════════ -->
   <section class="hero" aria-label="Welcome">
     <div class="hero-svg-side" aria-hidden="true">
       <div class="hero-svg-wrap" role="presentation" set:html={churchSvg}></div>
@@ -24,110 +25,199 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <p class="hero-tagline">prayer &amp; innovation</p>
       <h1 class="hero-title">Oratio&amp;Co</h1>
       <p class="hero-subtitle">
-        Equipping churches and organizations to navigate fluid contexts through strategic design, theological
-        reflection, and innovation.
+        A strategic design consultancy for churches, ministries, and faith-driven teams navigating fluid contexts.
       </p>
     </div>
   </section>
 
-  <!-- The Oratio&Co Method Section -->
-  <section class="section section-light">
+  <!-- ═════════ METHOD ═════════ -->
+  <section class="section section-method">
     <div class="container">
-      <h2 class="text-center">The Oratio&Co Method</h2>
-      <p class="text-center text-muted">Four pillars guiding our approach to ministry and organizational transformation</p>
-
-      <div class="pillar-grid">
-        <div class="pillar">
-          <h3>Context Humility</h3>
-          <p>Understanding the cultural context before acting. Every ministry operates within a specific context that shapes how the gospel is received.</p>
-        </div>
-        <div class="pillar">
-          <h3>Design Thinking</h3>
-          <p>Applying human-centered design principles to ministry challenges. Starting with empathy, prototyping solutions, and iterating based on feedback.</p>
-        </div>
-        <div class="pillar">
-          <h3>Collaborative Team Work</h3>
-          <p>Drawing on diverse gifts and perspectives within the body of Christ. Participatory leadership that empowers rather than controls.</p>
-        </div>
-        <div class="pillar">
-          <h3>Psychological Safety</h3>
-          <p>Creating environments where people can take risks, admit mistakes, and grow without fear of judgment.</p>
-        </div>
+      <div class="section-intro">
+        <p class="eyebrow">The Method</p>
+        <h2 class="display-h2">Four pillars<br/>we work by.</h2>
+        <p class="lead-intro">
+          These are the values that shape every engagement — from a half-day canvas session
+          with a church leadership team to a multi-month product partnership with a faith-tech startup.
+        </p>
       </div>
+
+      <ol class="method-list">
+        <li class="method-item">
+          <div class="method-num">01</div>
+          <div class="method-body">
+            <h3>Context Humility</h3>
+            <p>Understanding the cultural context before acting. Every ministry operates within a specific context that shapes how the gospel is received. We listen before we advise.</p>
+          </div>
+        </li>
+        <li class="method-item">
+          <div class="method-num">02</div>
+          <div class="method-body">
+            <h3>Design Thinking</h3>
+            <p>Applying human-centered design to ministry and product challenges. Starting with empathy, prototyping solutions, iterating on real feedback rather than assumptions.</p>
+          </div>
+        </li>
+        <li class="method-item">
+          <div class="method-num">03</div>
+          <div class="method-body">
+            <h3>Collaborative Team Work</h3>
+            <p>Drawing on diverse gifts and perspectives within the body of Christ and across the team. Participatory leadership that empowers rather than controls.</p>
+          </div>
+        </li>
+        <li class="method-item">
+          <div class="method-num">04</div>
+          <div class="method-body">
+            <h3>Psychological Safety</h3>
+            <p>Creating environments where people can take risks, admit mistakes, and grow without fear of judgment. Good work requires safe space — especially when the stakes are sacred.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="section">
+  <!-- ═════════ PULL QUOTE ═════════ -->
+  <section class="section section-quote">
     <div class="container">
-      <h2 class="text-center">How We Work With You</h2>
-      <p class="text-center text-muted">Four ways to bring Oratio&amp;Co into your ministry or team</p>
-
-      <div class="card-grid">
-        <div class="card">
-          <div class="card-num">01</div>
-          <h3 class="card-title">Ministry Consultation</h3>
-          <p>Personalized consultation to help your church or ministry navigate cultural shifts, clarify your missional identity, and design effective witness in fluid contexts. Typically 4–8 sessions, in-person or remote.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-num">02</div>
-          <h3 class="card-title">Canvas Workshop Facilitation</h3>
-          <p>We run a facilitated Ministry Model Canvas session with your team — half-day or full-day format. You leave with a shared strategic artifact and a plan for what to prototype next.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-num">03</div>
-          <h3 class="card-title">Innovation Training</h3>
-          <p>Workshops for ministry teams on applied design thinking, rapid prototyping, user research for churches, and formation-centered product development.</p>
-        </div>
-
-        <div class="card">
-          <div class="card-num">04</div>
-          <h3 class="card-title">Online Innovation Cohort</h3>
-          <p>Join a small cohort of ministry innovators working through the frameworks together — peer learning, structured exercises, and expert guidance over 8 weeks.</p>
-        </div>
-      </div>
-
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href={`${base}/about`} class="cta-button">Get in touch →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Frameworks We Use Section -->
-  <section class="section section-light">
-    <div class="container">
-      <h2 class="text-center">The Frameworks We Use</h2>
-      <p class="text-center text-muted">
-        Our consulting draws on a body of open-source frameworks published at
-        <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a>.
-        Read them, use them freely — or bring us in to help apply them to your context.
+      <blockquote class="pull-quote">
+        <p>
+          &ldquo;All ministry is designed —
+          <span class="quote-em">whether you know it or not.&rdquo;</span>
+        </p>
+        <cite>Tyler Prieb · Missional Labs</cite>
+      </blockquote>
+      <p class="quote-rejoinder">
+        Our work is helping ministries design on purpose.
       </p>
+    </div>
+  </section>
 
-      <div class="card-grid">
-        <div class="card">
-          <h3 class="card-title">Missional by Design</h3>
+  <!-- ═════════ SERVICES ═════════ -->
+  <section class="section section-services">
+    <div class="container">
+      <div class="section-intro">
+        <p class="eyebrow">How We Work With You</p>
+        <h2 class="display-h2">Four ways<br/>to bring us in.</h2>
+        <p class="lead-intro">
+          Every engagement is shaped to your context — but most fit one of these four patterns.
+          Start with whichever matches where you are, and we'll figure out what comes next together.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-num">01</div>
+          <h3>Ministry Consultation</h3>
+          <p>Personalized consultation to help your church navigate cultural shifts, clarify missional identity, and design effective witness in fluid contexts. Typically 4–8 sessions, in-person or remote.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">02</div>
+          <h3>Canvas Workshop Facilitation</h3>
+          <p>We facilitate a Ministry Model Canvas session with your team — half-day or full-day. You leave with a shared strategic artifact, a clear target audience, and a plan for what to prototype next.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">03</div>
+          <h3>Innovation Training</h3>
+          <p>Workshops for ministry teams on applied design thinking, rapid prototyping, user research for churches, and formation-centered product development. Delivered at your site or online.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-num">04</div>
+          <h3>Online Innovation Cohort</h3>
+          <p>A small cohort of ministry innovators working through the frameworks together over eight weeks — peer learning, structured exercises, and expert guidance. Next cohort starts quarterly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ PROCESS ═════════ -->
+  <section class="section section-process">
+    <div class="container">
+      <div class="section-intro">
+        <p class="eyebrow">How An Engagement Unfolds</p>
+        <h2 class="display-h2">Listen.<br/>Map. Build. Learn.</h2>
+        <p class="lead-intro">
+          Every project follows a simple shape — from first conversation to shipped work.
+          The scale varies; the rhythm is the same.
+        </p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="num">01</div>
+          <h4>Listen</h4>
+          <p>Conversations with leadership, staff, and the people you're trying to reach. We come in curious, not prescriptive.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">02</div>
+          <h4>Map</h4>
+          <p>We articulate what we've heard on a shared canvas — context, audience, missional identity, resources. One page you can point to.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">03</div>
+          <h4>Build</h4>
+          <p>Small, testable prototypes rather than five-year plans. A new gathering format, a redesigned communication, a product experiment.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">04</div>
+          <h4>Learn</h4>
+          <p>We measure what actually happened, adjust what didn't work, and hand you the tools to keep iterating after we're gone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ FRAMEWORKS ═════════ -->
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-intro">
+        <p class="eyebrow">The Tools We Work With</p>
+        <h2 class="display-h2">Frameworks,<br/>free to use.</h2>
+        <p class="lead-intro">
+          Our consulting draws on a body of open-source frameworks published at
+          <a href="https://missional.design" target="_blank" rel="noopener noreferrer"><strong>missional.design</strong></a>.
+          Read them, use them freely — or bring us in to help apply them to your context.
+        </p>
+      </div>
+
+      <div class="frameworks-grid">
+        <a href={`${base}/missional-by-design`} class="framework-card">
+          <div class="framework-card-eyebrow">01 · Approach</div>
+          <h3>Missional by Design</h3>
           <p>The underlying approach. A transformational framework for church leadership combining strategic thinking, stewardship, and participatory operations.</p>
-          <a href={`${base}/missional-by-design`} class="card-link">Read the approach →</a>
-        </div>
+          <span class="framework-card-link">Read the approach <span aria-hidden="true">→</span></span>
+        </a>
 
-        <div class="card">
-          <h3 class="card-title">Ministry Model Canvas</h3>
+        <a href="https://missional.design/ministry-model-canvas" target="_blank" rel="noopener noreferrer" class="framework-card">
+          <div class="framework-card-eyebrow">02 · Canvas</div>
+          <h3>Ministry Model Canvas</h3>
           <p>A nine-block strategic planning framework adapted from the Business Model Canvas. For clarifying target audience, missional identity, and effectiveness.</p>
-          <a href="https://missional.design/ministry-model-canvas" target="_blank" rel="noopener noreferrer" class="card-link">Explore the canvas ↗</a>
-        </div>
+          <span class="framework-card-link">Explore the canvas <span aria-hidden="true">↗</span></span>
+        </a>
 
-        <div class="card">
-          <h3 class="card-title">Missional Product Design</h3>
+        <a href="https://missional.design/framework" target="_blank" rel="noopener noreferrer" class="framework-card">
+          <div class="framework-card-eyebrow">03 · Product</div>
+          <h3>Missional Product Design</h3>
           <p>Nine principles and six diagnostic questions for building digital tools that serve spiritual formation rather than engagement optimization.</p>
-          <a href="https://missional.design/framework" target="_blank" rel="noopener noreferrer" class="card-link">Read the framework ↗</a>
-        </div>
+          <span class="framework-card-link">Read the framework <span aria-hidden="true">↗</span></span>
+        </a>
       </div>
     </div>
   </section>
 
-
+  <!-- ═════════ FINAL CTA ═════════ -->
+  <section class="section section-cta">
+    <div class="container">
+      <p class="eyebrow">Let's Work Together</p>
+      <h2 class="cta-title">Something<br/>you're building?</h2>
+      <p class="cta-sub">
+        If you're a church, ministry, or faith-driven team working on something new — or trying to reshape something
+        old — we'd love to hear about it. First conversations are free and unhurried.
+      </p>
+      <a href={`${base}/about`} class="cta-button">Get in touch</a>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -146,7 +236,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     animation: floatGently 14s ease-in-out infinite alternate;
   }
 
-  /* Gentle breathing tilt so it feels alive */
   @keyframes floatGently {
     from { transform: rotateY(-14deg) rotateX(6deg) rotateZ(-1deg) translateY(0); }
     to   { transform: rotateY(-10deg) rotateX(4deg) rotateZ( 1deg) translateY(-8px); }
@@ -159,7 +248,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     display: block;
     position: relative;
     z-index: 5;
-    /* Extruded depth — stacked drop-shadows create layered parallax copies */
     filter:
       drop-shadow( 1px  1px 0 rgba(131, 201, 236, 0.55))
       drop-shadow( 3px  3px 0 rgba(131, 201, 236, 0.45))
@@ -169,7 +257,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       drop-shadow(18px 18px 32px rgba(0, 0, 0, 0.18));
   }
 
-  /* Scale back on small screens, drop perspective */
   @media (max-width: 900px) {
     .hero-svg-wrap {
       transform: rotateY(-8deg) rotateX(3deg);
@@ -185,10 +272,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
   }
 
-  /* User preference — don't animate if reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    .hero-svg-wrap {
-      animation: none;
-    }
+    .hero-svg-wrap { animation: none; }
   }
 </style>
