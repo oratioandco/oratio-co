@@ -257,6 +257,39 @@ a:hover {
   border-radius: 8px;
   padding: 2rem;
   transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.card-num {
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 125, 'opsz' 14;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: #83c6ec;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #0a1a2a;
+  color: #fff;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 120, 'opsz' 14;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+  background: #1a2a3a;
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .card:hover {

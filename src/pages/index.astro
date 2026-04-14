@@ -57,53 +57,71 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
   </section>
 
-  <!-- What We Do Section -->
+  <!-- Services Section -->
   <section class="section">
     <div class="container">
-      <h2 class="text-center">What We Do</h2>
-      <p class="text-center text-muted">Strategic design and ministry consulting for flourishing communities</p>
+      <h2 class="text-center">How We Work With You</h2>
+      <p class="text-center text-muted">Four ways to bring Oratio&amp;Co into your ministry or team</p>
 
-      <div style="margin-top: 2rem; font-size: 1.05rem; line-height: 1.8; color: var(--color-gray); max-width: 700px; margin-left: auto; margin-right: auto;">
-        <ul style="list-style: none; padding: 0;">
-          <li style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;">Ministry consulting and strategic design</strong> — helping churches clarify their mission and operationalize their vision
-          </li>
-          <li style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href="https://missional.design/ministry-model-canvas" target="_blank" rel="noopener noreferrer">The Ministry Model Canvas</a></strong> — a strategic planning tool adapted from the Business Model Canvas
-          </li>
-          <li style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href="https://missional.design" target="_blank" rel="noopener noreferrer">Missional Product Design</a></strong> — building digital tools that foster spiritual formation and community
-          </li>
-          <li style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href="https://aperto.bible" target="_blank" rel="noopener noreferrer">Building Aperto</a></strong> — digital spiritual formation resources for the global church
-          </li>
-        </ul>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-num">01</div>
+          <h3 class="card-title">Ministry Consultation</h3>
+          <p>Personalized consultation to help your church or ministry navigate cultural shifts, clarify your missional identity, and design effective witness in fluid contexts. Typically 4–8 sessions, in-person or remote.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-num">02</div>
+          <h3 class="card-title">Canvas Workshop Facilitation</h3>
+          <p>We run a facilitated Ministry Model Canvas session with your team — half-day or full-day format. You leave with a shared strategic artifact and a plan for what to prototype next.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-num">03</div>
+          <h3 class="card-title">Innovation Training</h3>
+          <p>Workshops for ministry teams on applied design thinking, rapid prototyping, user research for churches, and formation-centered product development.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-num">04</div>
+          <h3 class="card-title">Online Innovation Cohort</h3>
+          <p>Join a small cohort of ministry innovators working through the frameworks together — peer learning, structured exercises, and expert guidance over 8 weeks.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href={`${base}/about`} class="cta-button">Get in touch →</a>
       </div>
     </div>
   </section>
 
-  <!-- Featured Work / Resources Section -->
+  <!-- Frameworks We Use Section -->
   <section class="section section-light">
     <div class="container">
-      <h2 class="text-center">Featured Work</h2>
+      <h2 class="text-center">The Frameworks We Use</h2>
+      <p class="text-center text-muted">
+        Our consulting draws on a body of open-source frameworks published at
+        <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a>.
+        Read them, use them freely — or bring us in to help apply them to your context.
+      </p>
 
       <div class="card-grid">
         <div class="card">
           <h3 class="card-title">Missional by Design</h3>
-          <p>Growing flourishing ministries in fluid contexts. A transformational approach to church leadership combining strategic thinking, responsible stewardship, and participatory operations.</p>
-          <a href={`${base}/missional-by-design`} class="card-link">Learn more →</a>
+          <p>The underlying approach. A transformational framework for church leadership combining strategic thinking, stewardship, and participatory operations.</p>
+          <a href={`${base}/missional-by-design`} class="card-link">Read the approach →</a>
         </div>
 
         <div class="card">
           <h3 class="card-title">Ministry Model Canvas</h3>
-          <p>A strategic planning framework adapted from the Business Model Canvas. Nine blocks to help churches clarify their target audience, name their good news, and design toward missional effectiveness.</p>
-          <a href="https://missional.design/ministry-model-canvas" target="_blank" rel="noopener noreferrer" class="card-link">Explore the canvas →</a>
+          <p>A nine-block strategic planning framework adapted from the Business Model Canvas. For clarifying target audience, missional identity, and effectiveness.</p>
+          <a href="https://missional.design/ministry-model-canvas" target="_blank" rel="noopener noreferrer" class="card-link">Explore the canvas ↗</a>
         </div>
 
         <div class="card">
-          <h3 class="card-title">Missional Product Design Framework</h3>
+          <h3 class="card-title">Missional Product Design</h3>
           <p>Nine principles and six diagnostic questions for building digital tools that serve spiritual formation rather than engagement optimization.</p>
-          <a href="https://missional.design/framework" target="_blank" rel="noopener noreferrer" class="card-link">Read the framework →</a>
+          <a href="https://missional.design/framework" target="_blank" rel="noopener noreferrer" class="card-link">Read the framework ↗</a>
         </div>
       </div>
     </div>
