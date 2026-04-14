@@ -19,16 +19,21 @@ html {
 }
 
 body {
-  font-family: 'PT Serif', Georgia, serif;
+  font-family: 'Roboto Flex', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 14;
   color: var(--color-dark);
   line-height: 1.6;
   background: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variation-settings: 'wdth' 95, 'opsz' 32;
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -62,17 +67,31 @@ a:hover {
   color: var(--color-dark);
 }
 
-/* Hero Section Styles */
+/* Hero Section Styles - left/right split */
 .hero {
   background: linear-gradient(to bottom, var(--color-blue), var(--color-gold));
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 6vw;
+  color: white;
+}
+
+.hero-svg-side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.hero-text-side {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  color: white;
-  text-align: center;
+  gap: 1.25rem;
+  max-width: 600px;
 }
 
 .hero-content {
@@ -86,32 +105,58 @@ a:hover {
 
 .hero-svg {
   width: 100%;
-  max-width: 600px;
+  max-width: 720px;
   height: auto;
-  max-height: 60vh;
-  margin-bottom: 1rem;
+  max-height: 85vh;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: 700;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 90, 'opsz' 144;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .hero-tagline {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  font-weight: 500;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 110, 'opsz' 14;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
   margin: 0;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
 .hero-subtitle {
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  max-width: 600px;
-  line-height: 1.6;
-  opacity: 0.9;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 100, 'opsz' 18;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  max-width: 520px;
+  line-height: 1.5;
+  opacity: 0.95;
   margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 3rem 6vw;
+    min-height: auto;
+  }
+  .hero-text-side {
+    max-width: 100%;
+    align-items: center;
+  }
+  .hero-svg {
+    max-height: 50vh;
+  }
 }
 
 /* Container Styles */
