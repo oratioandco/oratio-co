@@ -209,80 +209,156 @@ p {
   gap: 1.5rem;
 }
 
-/* ------- Hero ------- */
+/* ------- Hero (video-first) ------- */
 .hero {
-  background: linear-gradient(to bottom, var(--color-blue), var(--color-gold));
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  gap: 3rem;
-  padding: 5rem 6vw;
-  color: var(--color-ink);
-  perspective: 1500px;
-  overflow: hidden;
   position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 5rem 6vw 4rem;
+  color: var(--color-cream);
+  /* Fallback: looks intentional even before the video file is dropped in */
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(131, 201, 236, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(240, 231, 148, 0.30) 0%, transparent 50%),
+    linear-gradient(160deg, #0a1a2a 0%, #1a2a3f 100%);
+  isolation: isolate;
 }
 
-.hero-text-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5rem;
-  max-width: 640px;
-  order: 1;
+.hero-video,
+.hero-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-.hero-svg-side {
+/* Subtle dark gradient for text legibility — weighted toward bottom-left */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(10, 26, 42, 0.7) 0%, rgba(10, 26, 42, 0.3) 40%, rgba(10, 26, 42, 0.15) 70%, rgba(10, 26, 42, 0.35) 100%),
+    linear-gradient(to right, rgba(10, 26, 42, 0.55) 0%, rgba(10, 26, 42, 0) 55%);
+  pointer-events: none;
+}
+
+.hero-meta {
+  position: absolute;
+  top: 5.5rem;
+  left: 6vw;
+  right: 6vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 0;
-  order: 2;
-  transform-style: preserve-3d;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 130, 'opsz' 14;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+  opacity: 0.8;
+}
+.hero-meta span { display: inline-block; }
+.hero-meta .dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--color-cream);
+  opacity: 0.6;
+  border-radius: 50%;
+  margin: 0 0.75em;
+  vertical-align: middle;
+}
+
+.hero-content {
+  max-width: 1100px;
+  width: 100%;
 }
 
 .hero-tagline {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
-  font-variation-settings: 'wdth' 125, 'opsz' 14, 'YTLC' 500;
-  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  font-variation-settings: 'wdth' 125, 'opsz' 14;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
   font-weight: 600;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--color-ink);
-  margin: 0;
+  color: var(--color-cream);
+  opacity: 0.88;
+  margin: 0 0 1.5rem 0;
 }
 
 .hero-title {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
   font-variation-settings: 'wdth' 151, 'opsz' 144, 'GRAD' 50;
-  font-size: clamp(3rem, 9vw, 7rem);
+  font-size: clamp(3rem, 11vw, 9rem);
   font-weight: 800;
-  line-height: 0.92;
-  letter-spacing: -0.045em;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
   margin: 0;
-  color: var(--color-ink);
+  color: var(--color-cream);
 }
 
 .hero-subtitle {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
-  font-variation-settings: 'wdth' 115, 'opsz' 18;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  max-width: 540px;
-  line-height: 1.5;
-  color: var(--color-ink);
+  font-variation-settings: 'wdth' 115, 'opsz' 20;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  max-width: 560px;
+  line-height: 1.4;
+  color: var(--color-cream);
+  opacity: 0.92;
   font-weight: 400;
+  margin-top: 1.75rem;
 }
 
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    text-align: left;
-    padding: 5rem 6vw 3rem;
-    min-height: auto;
-  }
-  .hero-text-side { max-width: 100%; order: 2; }
-  .hero-svg-side  { order: 1; }
+/* Respect reduced motion: pause video, show poster instead */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+
+@media (max-width: 720px) {
+  .hero { padding: 5rem 6vw 3rem; }
+  .hero-meta { font-size: 0.65rem; gap: 0.5rem; letter-spacing: 0.2em; }
+}
+
+/* ------- Mission statement (editorial opener after hero) ------- */
+.section-mission {
+  background: var(--color-cream);
+  padding: clamp(5rem, 14vh, 10rem) 0;
+}
+.mission-statement {
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 140, 'opsz' 72, 'GRAD' 25;
+  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+  color: var(--color-ink);
+}
+.mission-statement .accent {
+  background: linear-gradient(90deg, var(--color-blue-deep) 0%, var(--color-gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.mission-body {
+  max-width: 60ch;
+  margin-top: 3rem;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-variation-settings: 'wdth' 105, 'opsz' 18;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-ink-soft);
 }
 
 /* ------- Method list (editorial numbered) ------- */
@@ -614,20 +690,36 @@ p {
 
 /* ------- Final CTA ------- */
 .section-cta {
-  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-gold) 100%);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-cream);
+  position: relative;
+  overflow: hidden;
 }
+.section-cta::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 70%;
+  height: 140%;
+  background: radial-gradient(ellipse at center, rgba(131, 201, 236, 0.18) 0%, rgba(240, 231, 148, 0.10) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+.section-cta .container { position: relative; z-index: 1; }
 .cta-title {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
   font-variation-settings: 'wdth' 151, 'opsz' 144, 'GRAD' 50;
-  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
   font-weight: 800;
   line-height: 0.9;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.045em;
   max-width: 18ch;
+  margin-top: 2rem;
   margin-bottom: 2rem;
-  color: var(--color-ink);
+  color: var(--color-cream);
 }
+.section-cta .eyebrow { color: var(--color-cream); opacity: 0.7; }
 .cta-sub {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
   font-variation-settings: 'wdth' 115, 'opsz' 24;
@@ -636,6 +728,15 @@ p {
   line-height: 1.4;
   max-width: 55ch;
   margin-bottom: 2.5rem;
+  color: var(--color-cream);
+  opacity: 0.88;
+}
+.section-cta .cta-button {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+.section-cta .cta-button:hover {
+  background: var(--color-white);
   color: var(--color-ink);
 }
 
