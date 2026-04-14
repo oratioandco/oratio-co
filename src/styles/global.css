@@ -212,18 +212,38 @@ p {
 /* ------- Hero (video-first) ------- */
 .hero {
   position: relative;
+  /* 100svh respects mobile browser chrome; fall back to 100vh on older engines */
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   display: flex;
   align-items: flex-end;
   padding: 5rem 6vw 4rem;
   color: var(--color-cream);
-  /* Fallback: looks intentional even before the video file is dropped in */
   background:
     radial-gradient(ellipse at 30% 40%, rgba(131, 201, 236, 0.35) 0%, transparent 55%),
     radial-gradient(ellipse at 70% 70%, rgba(240, 231, 148, 0.30) 0%, transparent 50%),
     linear-gradient(160deg, #0a1a2a 0%, #1a2a3f 100%);
   isolation: isolate;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 4rem 6vw 3rem;
+  }
+  .hero-meta { top: 4.25rem; font-size: 0.62rem; letter-spacing: 0.18em; }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    /* On very small phones, let hero be shorter than viewport so content breathes */
+    min-height: auto;
+    padding: 3.5rem 6vw 2.75rem;
+    aspect-ratio: auto;
+  }
+  .hero-title { font-size: clamp(2.75rem, 14vw, 4.5rem) !important; }
+  .hero-subtitle { font-size: 1rem !important; }
+  .hero-meta { position: static; margin-bottom: 3rem; display: block; }
 }
 
 .hero-canvas {

@@ -11,7 +11,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const prefix = lang === 'de' ? `${base}/de` : base;
 const currentPath = new URL(Astro.request.url).pathname;
 
-// Helper to compute active state that also works with `/de` prefix
 function isActive(href: string): boolean {
   const p = currentPath.replace(/\/$/, '');
   const h = href.replace(/\/$/, '');
@@ -21,36 +20,83 @@ function isActive(href: string): boolean {
 }
 ---
 
-<nav class="nav" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Primary'}>
+<nav class="nav" aria-label={lang === 'de' ? 'Hauptnavigation' : 'Primary'} data-nav-open="false">
   <div class="nav-container">
     <a href={`${prefix}/`} class="logo">Oratio&amp;Co</a>
-    <ul class="nav-links">
-      <li>
-        <a href={`${prefix}/`} class={isActive(`${prefix}/`) ? 'active' : ''}>
-          {t(lang, 'nav.home')}
-        </a>
-      </li>
-      <li>
-        <a href={`${prefix}/missional-by-design`} class={isActive(`${prefix}/missional-by-design`) ? 'active' : ''}>
-          {t(lang, 'nav.missionalByDesign')}
-        </a>
-      </li>
-      <li>
-        <a href={lang === 'de' ? 'https://missional.design/de/ministry-model-canvas' : 'https://missional.design/ministry-model-canvas'} target="_blank" rel="noopener noreferrer">
-          {t(lang, 'nav.ministryModelCanvas')}
-          <span class="sr-only"> {t(lang, 'common.external')}</span>
-          <svg class="nav-external" aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
-        </a>
-      </li>
-      <li>
-        <a href={`${prefix}/about`} class={isActive(`${prefix}/about`) ? 'active' : ''}>
-          {t(lang, 'nav.about')}
-        </a>
-      </li>
-    </ul>
-    <LangSwitch currentLocale={lang} />
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label={lang === 'de' ? 'Menü umschalten' : 'Toggle menu'}>
+      <svg class="icon-menu" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg class="icon-close" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+
+    <div class="nav-menu" id="nav-menu">
+      <ul class="nav-links">
+        <li>
+          <a href={`${prefix}/`} class={isActive(`${prefix}/`) ? 'active' : ''}>
+            {t(lang, 'nav.home')}
+          </a>
+        </li>
+        <li>
+          <a href={`${prefix}/missional-by-design`} class={isActive(`${prefix}/missional-by-design`) ? 'active' : ''}>
+            {t(lang, 'nav.missionalByDesign')}
+          </a>
+        </li>
+        <li>
+          <a href={lang === 'de' ? 'https://missional.design/de/ministry-model-canvas' : 'https://missional.design/ministry-model-canvas'} target="_blank" rel="noopener noreferrer">
+            {t(lang, 'nav.ministryModelCanvas')}
+            <span class="sr-only"> {t(lang, 'common.external')}</span>
+            <svg class="nav-external" aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href={`${prefix}/about`} class={isActive(`${prefix}/about`) ? 'active' : ''}>
+            {t(lang, 'nav.about')}
+          </a>
+        </li>
+      </ul>
+      <LangSwitch currentLocale={lang} />
+    </div>
   </div>
 </nav>
+
+<script is:inline>
+  (function () {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const btn = nav.querySelector('.nav-toggle');
+    const menu = nav.querySelector('.nav-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      nav.setAttribute('data-nav-open', open ? 'true' : 'false');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open) document.body.style.overflow = 'hidden';
+      else document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', () => {
+      const open = nav.getAttribute('data-nav-open') === 'true';
+      setOpen(!open);
+    });
+
+    // Close when a menu link is activated (mobile)
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) setOpen(false);
+    });
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.getAttribute('data-nav-open') === 'true') {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+
+    // Reset on resize to desktop
+    const mq = window.matchMedia('(min-width: 720px)');
+    mq.addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  })();
+</script>
 
 <style>
   .nav {
@@ -70,8 +116,7 @@ function isActive(href: string): boolean {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .logo {
@@ -82,13 +127,38 @@ function isActive(href: string): boolean {
     letter-spacing: -0.015em;
     color: #0a1a2a;
     text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  /* ── Hamburger toggle ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    cursor: pointer;
+    color: #0a1a2a;
+    line-height: 0;
+    border-radius: 4px;
+  }
+  .nav-toggle:hover { background: rgba(10,26,42,0.06); }
+  .nav-toggle .icon-close { display: none; }
+  .nav[data-nav-open="true"] .icon-menu { display: none; }
+  .nav[data-nav-open="true"] .icon-close { display: inline; }
+
+  /* ── Menu (desktop: inline; mobile: overlay) ── */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
   }
 
   .nav-links {
     list-style: none;
     display: flex;
     gap: 2.25rem;
-    margin: 0 auto 0 2rem;
+    margin: 0;
     padding: 0;
   }
 
@@ -102,13 +172,8 @@ function isActive(href: string): boolean {
     text-decoration: none;
     transition: opacity 0.2s ease;
   }
-
   .nav-links a:hover { opacity: 1; }
-
-  .nav-links a.active {
-    opacity: 1;
-    font-weight: 700;
-  }
+  .nav-links a.active { opacity: 1; font-weight: 700; }
 
   .nav-external {
     display: inline-block;
@@ -119,23 +184,52 @@ function isActive(href: string): boolean {
 
   .sr-only {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
   }
 
-  @media (max-width: 720px) {
+  /* ── Mobile: hamburger + slide-down panel ── */
+  @media (max-width: 719px) {
+    .nav-toggle { display: inline-flex; align-items: center; }
+
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(246, 241, 231, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.75rem;
+      padding: 2rem 6vw 2.5rem;
+      border-bottom: 1px solid rgba(10, 26, 42, 0.08);
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+    }
+
+    .nav[data-nav-open="true"] .nav-menu {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .nav-links {
+      flex-direction: column;
       gap: 1.25rem;
-      margin: 0;
-      font-size: 0.85rem;
       width: 100%;
-      order: 3;
+    }
+    .nav-links a {
+      font-size: 1.1rem;
+      font-variation-settings: 'wdth' 130, 'opsz' 18;
+      opacity: 0.9;
     }
   }
 </style>
