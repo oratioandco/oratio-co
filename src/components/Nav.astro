@@ -1,23 +1,25 @@
 ---
-const currentPath = new URL(Astro.request.url).pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = new URL(Astro.request.url).pathname.replace(base, '') || '/';
 ---
 
 <nav class="nav">
   <div class="nav-container">
-    <a href="/" class="logo">Oratio&Co</a>
+    <a href={`${base}/`} class="logo">Oratio&Co</a>
     <ul class="nav-links">
-      <li><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></li>
-      <li><a href="/missional-by-design" class={currentPath === '/missional-by-design' ? 'active' : ''}>Missional by Design</a></li>
-      <li><a href="/ministry-model-canvas" class={currentPath === '/ministry-model-canvas' ? 'active' : ''}>Ministry Model Canvas</a></li>
-      <li><a href="/about" class={currentPath === '/about' ? 'active' : ''}>About</a></li>
+      <li><a href={`${base}/`} class={currentPath === '/' ? 'active' : ''}>Home</a></li>
+      <li><a href={`${base}/missional-by-design`} class={currentPath === '/missional-by-design' ? 'active' : ''}>Missional by Design</a></li>
+      <li><a href={`${base}/ministry-model-canvas`} class={currentPath === '/ministry-model-canvas' ? 'active' : ''}>Ministry Model Canvas</a></li>
+      <li><a href={`${base}/about`} class={currentPath === '/about' ? 'active' : ''}>About</a></li>
     </ul>
   </div>
 </nav>
 
 <style>
   .nav {
-    background: white;
-    border-bottom: 1px solid #f0f0f0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 100;

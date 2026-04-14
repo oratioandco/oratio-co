@@ -2,6 +2,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Inline the church SVG so stroke animation applies to its inner paths
+const churchSvg = fs.readFileSync(
+  path.resolve('./public/church.svg'),
+  'utf-8'
+);
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Oratio&Co - Prayer & Innovation" description="Equipping churches and organizations to navigate fluid contexts through strategic design, theological reflection, and innovation">
@@ -10,9 +20,7 @@ import Footer from '../components/Footer.astro';
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <svg id="church" class="hero-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-        <image href="/church.svg" width="500" height="500" />
-      </svg>
+      <div class="hero-svg-wrap" set:html={churchSvg}></div>
       <h1 class="hero-title">Oratio&Co</h1>
       <p class="hero-tagline">prayer & innovation</p>
       <p class="hero-subtitle">Equipping churches and organizations to navigate fluid contexts through strategic design, theological reflection, and innovation</p>
@@ -58,7 +66,7 @@ import Footer from '../components/Footer.astro';
             <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;">Ministry consulting and strategic design</strong> — helping churches clarify their mission and operationalize their vision
           </li>
           <li style="margin-bottom: 1.25rem;">
-            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href="/ministry-model-canvas">The Ministry Model Canvas</a></strong> — a strategic planning tool adapted from the Business Model Canvas
+            <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href={`${base}/ministry-model-canvas`}>The Ministry Model Canvas</a></strong> — a strategic planning tool adapted from the Business Model Canvas
           </li>
           <li style="margin-bottom: 1.25rem;">
             <strong style="color: var(--color-dark); font-family: 'Inter', sans-serif;"><a href="https://missional.design" target="_blank" rel="noopener noreferrer">Missional Product Design</a></strong> — building digital tools that foster spiritual formation and community
@@ -80,13 +88,13 @@ import Footer from '../components/Footer.astro';
         <div class="card">
           <h3 class="card-title">Missional by Design</h3>
           <p>Growing flourishing ministries in fluid contexts. A transformational approach to church leadership combining strategic thinking, responsible stewardship, and participatory operations.</p>
-          <a href="/missional-by-design" class="card-link">Learn more →</a>
+          <a href={`${base}/missional-by-design`} class="card-link">Learn more →</a>
         </div>
 
         <div class="card">
           <h3 class="card-title">Ministry Model Canvas</h3>
           <p>A strategic planning tool adapted from the Business Model Canvas. Nine blocks to help churches clarify their ministry model and navigate change.</p>
-          <a href="/ministry-model-canvas" class="card-link">Explore the canvas →</a>
+          <a href={`${base}/ministry-model-canvas`} class="card-link">Explore the canvas →</a>
         </div>
 
         <div class="card">
@@ -101,6 +109,17 @@ import Footer from '../components/Footer.astro';
   <Footer />
 </BaseLayout>
 
-<style is:global>
-  /* Override some global styles for this page */
+<style>
+  .hero-svg-wrap {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-svg-wrap :global(svg) {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+  }
 </style>
