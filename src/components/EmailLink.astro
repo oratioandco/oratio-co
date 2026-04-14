@@ -1,0 +1,61 @@
+---
+/**
+ * Scraper-resistant email link.
+ *
+ * Strategy:
+ *  1. Never output the literal "mailto:" or full email in the initial HTML
+ *  2. Split user/domain/tld across data-* attributes
+ *  3. Build the href at runtime via a small inline script
+ *  4. Visible label reads "hello [at] treppmann [dot] design" until JS upgrades it
+ *
+ * Usage: <EmailLink user="hello" domain="treppmann" tld="design" label="get in touch" />
+ */
+
+interface Props {
+  user?: string;
+  domain?: string;
+  tld?: string;
+  label?: string;
+  class?: string;
+}
+
+const {
+  user = 'toby',
+  domain = 'oratio',
+  tld = 'co',
+  label,
+  class: className = '',
+} = Astro.props;
+---
+
+<a
+  class={`obf-email ${className}`}
+  href="#"
+  data-u={user}
+  data-d={domain}
+  data-t={tld}
+  aria-label={`Send email to ${user} at ${domain} dot ${tld}`}
+>{label ?? <span>{user}<span class="obf-sep"> [at] </span>{domain}<span class="obf-sep"> [dot] </span>{tld}</span>}</a>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('a.obf-email').forEach(function (a) {
+      var u = a.getAttribute('data-u');
+      var d = a.getAttribute('data-d');
+      var t = a.getAttribute('data-t');
+      if (!u || !d || !t) return;
+      var addr = u + '@' + d + '.' + t;
+      a.setAttribute('href', 'mailto:' + addr);
+      var inner = a.querySelector('.obf-sep');
+      if (inner) {
+        a.textContent = addr;
+      }
+    });
+  })();
+</script>
+
+<style>
+  .obf-email {
+    cursor: pointer;
+  }
+</style>

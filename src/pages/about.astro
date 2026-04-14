@@ -1,11 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import EmailLink from '../components/EmailLink.astro';
 ---
 
 <BaseLayout title="About Tobias Treppmann" description="Learn about Tobias Treppmann, founder of Oratio&Co">
-  <Nav />
+
 
   <!-- Main Content -->
   <article style="max-width: 700px; margin: 0 auto; padding: 4rem 2rem;">
@@ -43,12 +42,12 @@ import Footer from '../components/Footer.astro';
     <h2>Get in Touch</h2>
     <p>Interested in exploring strategic design, missional innovation, or digital spiritual formation for your church or organization?</p>
     <p style="margin-top: 1.5rem;">
-      <strong style="color: var(--color-dark);">Email:</strong> <a href="mailto:hello@treppmann.design">hello@treppmann.design</a><br/>
+      <strong style="color: var(--color-dark);">Email:</strong> <EmailLink /><br/>
       <strong style="color: var(--color-dark);">Explore:</strong> <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a> | <a href="https://aperto.bible" target="_blank" rel="noopener noreferrer">aperto.bible</a>
     </p>
   </article>
 
-  <Footer />
+
 </BaseLayout>
 
 <style>

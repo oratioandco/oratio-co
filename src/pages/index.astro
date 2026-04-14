@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -15,12 +13,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Oratio&Co - Prayer & Innovation" description="Equipping churches and organizations to navigate fluid contexts through strategic design, theological reflection, and innovation">
-  <Nav />
+
 
   <!-- Hero Section - left/right split with large SVG -->
-  <section class="hero">
-    <div class="hero-svg-side">
-      <div class="hero-svg-wrap" set:html={churchSvg}></div>
+  <section class="hero" aria-label="Welcome">
+    <div class="hero-svg-side" aria-hidden="true">
+      <div class="hero-svg-wrap" role="presentation" set:html={churchSvg}></div>
     </div>
     <div class="hero-text-side">
       <p class="hero-tagline">prayer &amp; innovation</p>
@@ -111,7 +109,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
   </section>
 
-  <Footer />
+
 </BaseLayout>
 
 <style>

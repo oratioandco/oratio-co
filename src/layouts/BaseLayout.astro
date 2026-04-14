@@ -1,9 +1,16 @@
 ---
 import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  /**
+   * Set to true on the homepage if you don't want the sticky nav to overlap the hero SVG.
+   * Nav will still be rendered for keyboard/screen-reader users.
+   */
+  hideNav?: boolean;
 }
 
 const { title = "Oratio&Co", description = "Prayer & Innovation" } = Astro.props;
@@ -24,8 +31,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&family=PT+Serif:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <meta name="theme-color" content="#83c6ec" />
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Nav />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

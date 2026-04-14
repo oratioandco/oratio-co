@@ -14,6 +14,60 @@
   box-sizing: border-box;
 }
 
+/* Accessibility: skip link */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Roboto Flex', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transform: translateY(-120%);
+  transition: transform 150ms ease;
+  z-index: 1000;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 3px solid #ffd400;
+  outline-offset: 2px;
+}
+
+/* Accessibility: visible keyboard focus */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid #1a1a1a;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+/* On the dark/gradient hero, use a high-contrast yellow */
+.hero :focus-visible,
+.hero *:focus-visible {
+  outline-color: #ffd400;
+  outline-offset: 4px;
+}
+
+#main:focus,
+#main[tabindex]:focus {
+  outline: none;
+}
+
+/* Accessibility: respect reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -76,7 +130,8 @@ a:hover {
   align-items: center;
   gap: 3rem;
   padding: 4rem 6vw;
-  color: white;
+  /* Dark ink for WCAG-compliant contrast on the light gradient (>7:1 on both ends) */
+  color: #0a1a2a;
   perspective: 1500px;
   overflow: hidden;
 }
@@ -124,8 +179,7 @@ a:hover {
   line-height: 0.92;
   letter-spacing: -0.04em;
   margin: 0;
-  /* Subtle text depth */
-  text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 24px rgba(0,0,0,0.08);
+  color: #0a1a2a;
 }
 
 .hero-tagline {
@@ -133,11 +187,12 @@ a:hover {
   /* Wide and airy for tracked uppercase */
   font-variation-settings: 'wdth' 125, 'opsz' 14, 'YTLC' 500;
   font-size: clamp(0.85rem, 1.1vw, 1rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   margin: 0;
-  opacity: 0.9;
+  color: #0a1a2a;
+  /* Full opacity for contrast — the weight differentiation carries the hierarchy */
 }
 
 .hero-subtitle {
@@ -147,9 +202,9 @@ a:hover {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
   max-width: 540px;
   line-height: 1.5;
-  opacity: 0.95;
   margin-top: 0.5rem;
-  font-weight: 400;
+  font-weight: 500;
+  color: #0a1a2a;
 }
 
 /* Responsive: stack on mobile */

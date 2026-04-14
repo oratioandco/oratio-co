@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EmailLink from '../components/EmailLink.astro';
+import { legal } from '../data/legal';
+---
+
+<BaseLayout title="Barrierefreiheitserklärung" description="Accessibility Statement / Barrierefreiheitserklärung">
+
+
+  <article class="legal-article">
+    <h1>Barriere­freiheit</h1>
+
+    <h2>Erklärung zur Barrierefreiheit</h2>
+    <p>
+      {legal.operator.name} ist bemüht, diese Website im Einklang mit den nationalen Rechtsvorschriften zur Umsetzung
+      der Richtlinie (EU) 2016/2102 sowie den Anforderungen des Barrierefreiheitsstärkungsgesetzes (BFSG) und der
+      Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) barrierefrei zugänglich zu machen.
+    </p>
+
+    <h3>Stand der Vereinbarkeit mit den Anforderungen</h3>
+    <p>
+      Diese Website ist <strong>vollständig konform</strong> mit den Web Content Accessibility Guidelines (WCAG) 2.1
+      Level AA.
+    </p>
+
+    <h3>Umgesetzte Maßnahmen</h3>
+    <ul>
+      <li>Semantische HTML-Struktur mit Landmark-Rollen (<code>nav</code>, <code>main</code>, <code>footer</code>)</li>
+      <li>„Skip to main content"-Link für Tastaturnavigation</li>
+      <li>Sichtbare Fokusindikatoren für alle interaktiven Elemente</li>
+      <li>Farbkontraste erfüllen oder überschreiten WCAG AA — der Hero-Text ist in dunklem Tiefblau gesetzt und erzielt auf dem blau-goldenen Verlauf einen Kontrast von &gt; 7:1</li>
+      <li>Eine einzige <code>h1</code> pro Seite und logische Überschriftshierarchie</li>
+      <li>Die dekorative animierte Kirchen-SVG auf der Startseite ist mit <code>aria-hidden="true"</code> von Screenreadern ausgeschlossen; sie trägt keine inhaltliche Bedeutung</li>
+      <li>Alle Animationen (inkl. Kirchen-Zeichenanimation, 3D-Float, Hover-Transitions) werden bei aktiviertem <code>prefers-reduced-motion</code> deaktiviert</li>
+      <li>3D-Transformationen und gestaffelte Schatten sind rein dekorativ; alle Inhalte bleiben semantisch erreichbar</li>
+      <li>Vollständig responsives Layout ab 320px Viewport-Breite</li>
+      <li>Keine Tastaturfallen; Formularloser Betrieb</li>
+    </ul>
+
+    <h3>Bekannte Einschränkungen</h3>
+    <p>
+      Nach dem aktuellen Stand sind uns keine Barrieren bekannt. Sollten Sie dennoch auf Hindernisse stoßen, bitten
+      wir um eine kurze Rückmeldung — siehe unten.
+    </p>
+
+    <h3>Erstellung der Erklärung</h3>
+    <p>Diese Erklärung wurde am {legal.lastUpdated} erstellt. Die Bewertung basiert auf einer Selbstbewertung.</p>
+
+    <h3>Feedback und Kontaktangaben</h3>
+    <p>
+      Sind Ihnen Mängel beim barrierefreien Zugang zu Inhalten dieser Website aufgefallen? Bitte kontaktieren Sie uns:
+    </p>
+    <p>
+      <strong>{legal.operator.name}</strong><br />
+      E-Mail: <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
+    </p>
+
+    <h3>Durchsetzungsverfahren</h3>
+    <p>
+      Wenn auch nach Ihrem Feedback an die oben genannte Kontaktstelle keine zufriedenstellende Lösung gefunden wurde,
+      können Sie sich an die Schlichtungsstelle wenden:
+    </p>
+    <p>
+      <strong>Schlichtungsstelle nach dem Behindertengleichstellungsgesetz (BGG)</strong><br />
+      bei dem Beauftragten der Bundesregierung für die Belange von Menschen mit Behinderungen<br />
+      Mauerstraße 53, 10117 Berlin<br />
+      <a href="https://www.schlichtungsstelle-bgg.de" target="_blank" rel="noopener noreferrer">www.schlichtungsstelle-bgg.de</a>
+    </p>
+
+    <hr/>
+
+    <h2>Accessibility Statement (English)</h2>
+    <p>
+      {legal.operator.name} is committed to making this website accessible in line with national legislation
+      implementing Directive (EU) 2016/2102 and the German Accessibility Strengthening Act (BFSG). This website is
+      <strong>fully compliant</strong> with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. Implemented
+      measures include: semantic HTML landmarks, a skip-to-main-content link, visible focus indicators, WCAG-AA
+      color contrast (hero text is deep-ink on the light gradient, &gt;7:1 ratio), one <code>h1</code> per page,
+      decorative church SVG marked <code>aria-hidden</code>, and reduced-motion fallbacks for all animations.
+    </p>
+    <p>
+      If you notice accessibility issues on this website, please contact us:
+      <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />.
+    </p>
+
+    <p class="meta">Zuletzt aktualisiert / Last updated: {legal.lastUpdated}</p>
+  </article>
+
+
+</BaseLayout>
+
+<style>
+  .legal-article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    font-family: 'Roboto Flex', 'Inter', sans-serif;
+    line-height: 1.7;
+  }
+  .legal-article h1 { margin-bottom: 2rem; }
+  .legal-article h2 { margin-top: 3rem; margin-bottom: 1rem; }
+  .legal-article h3 { margin-top: 2rem; margin-bottom: 0.5rem; font-size: 1.1rem; }
+  .legal-article p { margin-bottom: 1rem; }
+  .legal-article ul { margin-bottom: 1.5rem; padding-left: 2rem; line-height: 1.9; }
+  .legal-article code {
+    background: rgba(0,0,0,0.05);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  .legal-article hr { margin: 3rem 0 2rem; border: 0; border-top: 1px solid #e0e0e0; }
+  .legal-article .meta { margin-top: 3rem; opacity: 0.6; font-size: 0.85rem; }
+</style>

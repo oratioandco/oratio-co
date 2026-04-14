@@ -1,15 +1,24 @@
 ---
+import EmailLink from './EmailLink.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-main">
-      <p class="footer-text">Tobias Treppmann | <a href="mailto:hello@treppmann.design">hello@treppmann.design</a></p>
+      <p class="footer-text">Tobias Treppmann &nbsp;|&nbsp; <EmailLink /></p>
       <div class="footer-links">
         <a href="https://missional.design" target="_blank" rel="noopener noreferrer">missional.design</a>
         <span class="separator">•</span>
         <a href="https://aperto.bible" target="_blank" rel="noopener noreferrer">aperto.bible</a>
       </div>
+    </div>
+    <div class="footer-legal">
+      <a href={`${base}/impressum`}>Impressum</a>
+      <span class="separator">•</span>
+      <a href={`${base}/datenschutz`}>Datenschutz</a>
+      <span class="separator">•</span>
+      <a href={`${base}/barrierefreiheit`}>Barrierefreiheit</a>
     </div>
     <p class="footer-credit">© 2026 Oratio&Co. All rights reserved.</p>
   </div>
@@ -55,14 +64,24 @@
     font-size: 0.9rem;
   }
 
-  .footer-links a {
+  .footer-links a,
+  .footer-legal a {
     color: #83c6ec;
     text-decoration: none;
     transition: color 0.2s ease;
   }
 
-  .footer-links a:hover {
+  .footer-links a:hover,
+  .footer-legal a:hover {
     color: #1a1a1a;
+  }
+
+  .footer-legal {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: #888;
   }
 
   .separator {
