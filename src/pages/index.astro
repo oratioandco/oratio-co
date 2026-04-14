@@ -115,23 +115,64 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </BaseLayout>
 
 <style>
+  /* 3D stage for the church SVG — extruded, tilted, dimensional */
   .hero-svg-wrap {
+    position: relative;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+    transform-style: preserve-3d;
+    transform:
+      rotateY(-14deg)
+      rotateX(6deg)
+      rotateZ(-1deg);
+    transition: transform 600ms cubic-bezier(.2, .8, .2, 1);
+    animation: floatGently 14s ease-in-out infinite alternate;
   }
+
+  /* Gentle breathing tilt so it feels alive */
+  @keyframes floatGently {
+    from { transform: rotateY(-14deg) rotateX(6deg) rotateZ(-1deg) translateY(0); }
+    to   { transform: rotateY(-10deg) rotateX(4deg) rotateZ( 1deg) translateY(-8px); }
+  }
+
   .hero-svg-wrap :global(svg) {
     width: 100%;
     height: auto;
     max-height: 85vh;
-    max-width: 720px;
+    display: block;
+    position: relative;
+    z-index: 5;
+    /* Extruded depth — stacked drop-shadows create layered parallax copies */
+    filter:
+      drop-shadow( 1px  1px 0 rgba(131, 201, 236, 0.55))
+      drop-shadow( 3px  3px 0 rgba(131, 201, 236, 0.45))
+      drop-shadow( 6px  6px 0 rgba(240, 231, 148, 0.50))
+      drop-shadow( 9px  9px 0 rgba(240, 231, 148, 0.40))
+      drop-shadow(12px 12px 0 rgba(255, 255, 255, 0.35))
+      drop-shadow(18px 18px 32px rgba(0, 0, 0, 0.18));
   }
 
+  /* Scale back on small screens, drop perspective */
   @media (max-width: 900px) {
+    .hero-svg-wrap {
+      transform: rotateY(-8deg) rotateX(3deg);
+      animation: none;
+    }
     .hero-svg-wrap :global(svg) {
       max-height: 50vh;
       max-width: 400px;
+      filter:
+        drop-shadow( 2px 2px 0 rgba(131, 201, 236, 0.5))
+        drop-shadow( 5px 5px 0 rgba(240, 231, 148, 0.4))
+        drop-shadow( 8px 8px 20px rgba(0,0,0,0.15));
+    }
+  }
+
+  /* User preference — don't animate if reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-svg-wrap {
+      animation: none;
     }
   }
 </style>

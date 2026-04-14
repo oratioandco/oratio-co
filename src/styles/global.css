@@ -67,16 +67,27 @@ a:hover {
   color: var(--color-dark);
 }
 
-/* Hero Section Styles - left/right split */
+/* Hero Section Styles - left text, right SVG with 3D tilt */
 .hero {
   background: linear-gradient(to bottom, var(--color-blue), var(--color-gold));
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1fr 1.1fr;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
   padding: 4rem 6vw;
   color: white;
+  perspective: 1500px;
+  overflow: hidden;
+}
+
+.hero-text-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 640px;
+  order: 1;
 }
 
 .hero-svg-side {
@@ -84,14 +95,8 @@ a:hover {
   justify-content: center;
   align-items: center;
   min-width: 0;
-}
-
-.hero-text-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.25rem;
-  max-width: 600px;
+  order: 2;
+  transform-style: preserve-3d;
 }
 
 .hero-content {
@@ -112,20 +117,24 @@ a:hover {
 
 .hero-title {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
-  font-variation-settings: 'wdth' 90, 'opsz' 144;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  /* Lean into the wide axis — extended display face */
+  font-variation-settings: 'wdth' 151, 'opsz' 144, 'GRAD' 50;
+  font-size: clamp(3rem, 9vw, 7rem);
   font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.035em;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   margin: 0;
+  /* Subtle text depth */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 4px 24px rgba(0,0,0,0.08);
 }
 
 .hero-tagline {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
-  font-variation-settings: 'wdth' 110, 'opsz' 14;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  font-weight: 400;
-  letter-spacing: 0.25em;
+  /* Wide and airy for tracked uppercase */
+  font-variation-settings: 'wdth' 125, 'opsz' 14, 'YTLC' 500;
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   margin: 0;
   opacity: 0.9;
@@ -133,9 +142,10 @@ a:hover {
 
 .hero-subtitle {
   font-family: 'Roboto Flex', 'Inter', sans-serif;
-  font-variation-settings: 'wdth' 100, 'opsz' 18;
+  /* Slightly wide for readable weight-on-color */
+  font-variation-settings: 'wdth' 115, 'opsz' 18;
   font-size: clamp(1rem, 1.4vw, 1.2rem);
-  max-width: 520px;
+  max-width: 540px;
   line-height: 1.5;
   opacity: 0.95;
   margin-top: 0.5rem;
