@@ -23,7 +23,7 @@ import { legal } from '../data/legal';
       {legal.operator.street}<br />
       {legal.operator.postcode} {legal.operator.city}<br />
       {legal.operator.country}<br />
-      E-Mail: <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
+      <EmailLink label="E-Mail schreiben" user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
     </p>
 
     <h2>2. Hosting — GitHub Pages</h2>

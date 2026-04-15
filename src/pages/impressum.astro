@@ -21,7 +21,7 @@ import { legal } from '../data/legal';
     <h3>Kontakt</h3>
     <p>
       Telefon: {legal.operator.phone}<br />
-      E-Mail: <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
+      <EmailLink label="E-Mail schreiben" user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
     </p>
 
     {legal.operator.vatId && (
@@ -92,7 +92,7 @@ import { legal } from '../data/legal';
     </p>
     <p>
       Phone: {legal.operator.phone}<br />
-      Email: <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
+      <EmailLink label="Email me" user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
     </p>
     <p>
       Person responsible for editorial content according to § 18 Abs. 2 MStV: {legal.editorialResponsible.name},

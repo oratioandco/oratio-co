@@ -26,15 +26,16 @@ import { legal } from '../data/legal';
     <h3>Umgesetzte Maßnahmen</h3>
     <ul>
       <li>Semantische HTML-Struktur mit Landmark-Rollen (<code>nav</code>, <code>main</code>, <code>footer</code>)</li>
-      <li>„Skip to main content"-Link für Tastaturnavigation</li>
+      <li>„Skip to main content"-Link für Tastaturnavigation; tastaturbedienbares Haupt- und Hamburger-Menü</li>
       <li>Sichtbare Fokusindikatoren für alle interaktiven Elemente</li>
-      <li>Farbkontraste erfüllen oder überschreiten WCAG AA — der Hero-Text ist in dunklem Tiefblau gesetzt und erzielt auf dem blau-goldenen Verlauf einen Kontrast von &gt; 7:1</li>
+      <li>Farbkontraste erfüllen oder überschreiten WCAG AA — der Hero-Text ist in dunklem Tiefblau auf hellem Verlauf gesetzt und erzielt einen Kontrast von &gt; 7:1</li>
       <li>Eine einzige <code>h1</code> pro Seite und logische Überschriftshierarchie</li>
-      <li>Die dekorative animierte Kirchen-SVG auf der Startseite ist mit <code>aria-hidden="true"</code> von Screenreadern ausgeschlossen; sie trägt keine inhaltliche Bedeutung</li>
-      <li>Alle Animationen (inkl. Kirchen-Zeichenanimation, 3D-Float, Hover-Transitions) werden bei aktiviertem <code>prefers-reduced-motion</code> deaktiviert</li>
-      <li>3D-Transformationen und gestaffelte Schatten sind rein dekorativ; alle Inhalte bleiben semantisch erreichbar</li>
-      <li>Vollständig responsives Layout ab 320px Viewport-Breite</li>
+      <li>Die dekorative Canvas-Animation auf der Startseite (ein rotierender Drahtgitter-Globus mit gepulsten Kantenzyklen und dezenten Buntglas-Flächen) ist mit <code>aria-hidden="true"</code> und <code>role="presentation"</code> ausgezeichnet; sie trägt keine inhaltliche Bedeutung und ist rein atmosphärisch</li>
+      <li>Bei aktiviertem <code>prefers-reduced-motion</code> wird die Animation auf ein einzelnes Standbild reduziert; die Maus-Interaktion mit dem Globus wird deaktiviert</li>
+      <li>Die Canvas-Animation pausiert automatisch, wenn der Tab in den Hintergrund wechselt (Akku-/Batterieschonung)</li>
+      <li>Vollständig responsives Layout ab 320px Viewport-Breite; mobiles Hamburger-Menü unterhalb von 720px mit zugänglichem <code>aria-expanded</code>-Status</li>
       <li>Keine Tastaturfallen; Formularloser Betrieb</li>
+      <li>E-Mail-Adressen sind vor automatisiertem Scraping geschützt; sie werden erst bei Nutzerinteraktion (Mausbewegung, Fokus, Klick) in ein <code>mailto:</code>-Link aufgelöst</li>
     </ul>
 
     <h3>Bekannte Einschränkungen</h3>
@@ -52,7 +53,7 @@ import { legal } from '../data/legal';
     </p>
     <p>
       <strong>{legal.operator.name}</strong><br />
-      E-Mail: <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
+      <EmailLink label="E-Mail schreiben" user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />
     </p>
 
     <h3>Durchsetzungsverfahren</h3>
@@ -75,12 +76,15 @@ import { legal } from '../data/legal';
       implementing Directive (EU) 2016/2102 and the German Accessibility Strengthening Act (BFSG). This website is
       <strong>fully compliant</strong> with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. Implemented
       measures include: semantic HTML landmarks, a skip-to-main-content link, visible focus indicators, WCAG-AA
-      color contrast (hero text is deep-ink on the light gradient, &gt;7:1 ratio), one <code>h1</code> per page,
-      decorative church SVG marked <code>aria-hidden</code>, and reduced-motion fallbacks for all animations.
+      color contrast (hero text sits in deep-ink on a light background, &gt;7:1 ratio), one <code>h1</code> per page,
+      and a decorative Canvas-based animated wireframe orb marked <code>aria-hidden</code> and <code>role="presentation"</code>.
+      With <code>prefers-reduced-motion</code>, the animation is reduced to a single static frame and pointer
+      interaction is disabled; the canvas pauses entirely when the browser tab is backgrounded. A mobile hamburger
+      menu is keyboard-accessible with proper <code>aria-expanded</code> state. Email addresses are protected from
+      automated scraping and resolve to <code>mailto:</code> links only on real user interaction.
     </p>
     <p>
-      If you notice accessibility issues on this website, please contact us:
-      <EmailLink user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />.
+      If you notice accessibility issues on this website, please <EmailLink label="Contact" user={legal.operator.email.user} domain={legal.operator.email.domain} tld={legal.operator.email.tld} />.
     </p>
 
     <p class="meta">Zuletzt aktualisiert / Last updated: {legal.lastUpdated}</p>

@@ -1,14 +1,25 @@
 ---
 /**
- * Scraper-resistant email link.
+ * Scraper-resistant email link — hardened.
  *
- * Strategy:
- *  1. Never output the literal "mailto:" or full email in the initial HTML
- *  2. Split user/domain/tld across data-* attributes
- *  3. Build the href at runtime via a small inline script
- *  4. Visible label reads "hello [at] treppmann [dot] design" until JS upgrades it
+ * Threats defended:
+ *  - Plain HTML scraping: the email never appears as literal text, mailto: href,
+ *    or identifiable adjacent tokens (no @, no "at", no "dot", no split user/domain
+ *    attributes). Visible label is a generic word like "Email".
+ *  - Pattern scrapers (regex/selectors): single opaque data attribute whose
+ *    decoded value is prefixed with a salt, so even after base64 decoding it
+ *    doesn't match /^.+@.+\..+$/ without stripping the salt.
+ *  - Lazy headless scrapers: decode fires only on actual user interaction
+ *    (pointerenter / focus / mousedown / keydown). Load-time DOM snapshots
+ *    will never see the real email.
+ *  - Determined headless scrapers with interaction simulation: per-element
+ *    hovering is the minimum effort they have to spend, which filters out
+ *    virtually all drive-by scraping tools.
  *
- * Usage: <EmailLink user="hello" domain="treppmann" tld="design" label="get in touch" />
+ * Usage:
+ *   <EmailLink />                              // defaults + label "Email"
+ *   <EmailLink label="Kontakt" />
+ *   <EmailLink user="info" domain="oratio" tld="co" label="Get in touch" class="cta-button" />
  */
 
 interface Props {
@@ -23,39 +34,52 @@ const {
   user = 'toby',
   domain = 'oratio',
   tld = 'co',
-  label,
+  label = 'Email',
   class: className = '',
 } = Astro.props;
+
+// Deterministic salt prefix — included inside the base64 so the decoded string
+// doesn't match a naive email regex. Stable across builds.
+const SALT = 'x7$';
+const addr = `${user}@${domain}.${tld}`;
+const encoded = Buffer.from(SALT + addr, 'utf-8').toString('base64');
 ---
 
 <a
   class={`obf-email ${className}`}
   href="#"
-  data-u={user}
-  data-d={domain}
-  data-t={tld}
-  aria-label={`Send email to ${user} at ${domain} dot ${tld}`}
->{label ?? <span>{user}<span class="obf-sep"> [at] </span>{domain}<span class="obf-sep"> [dot] </span>{tld}</span>}</a>
+  data-x={encoded}
+  aria-label={label}
+>{label}</a>
 
 <script is:inline>
   (function () {
-    document.querySelectorAll('a.obf-email').forEach(function (a) {
-      var u = a.getAttribute('data-u');
-      var d = a.getAttribute('data-d');
-      var t = a.getAttribute('data-t');
-      if (!u || !d || !t) return;
-      var addr = u + '@' + d + '.' + t;
-      a.setAttribute('href', 'mailto:' + addr);
-      var inner = a.querySelector('.obf-sep');
-      if (inner) {
-        a.textContent = addr;
-      }
+    var SALT_LEN = 3; // must match SALT.length on the Astro side
+    function reveal(el) {
+      var enc = el.getAttribute('data-x');
+      if (!enc) return;
+      try {
+        var decoded = atob(enc);
+        if (decoded.length <= SALT_LEN) return;
+        var addr = decoded.slice(SALT_LEN);
+        el.setAttribute('href', 'mailto:' + addr);
+        el.removeAttribute('data-x'); // one-shot; remove after decode
+      } catch (e) { /* ignore */ }
+    }
+    document.querySelectorAll('a.obf-email').forEach(function (el) {
+      var once = { once: true };
+      el.addEventListener('pointerenter', function () { reveal(el); }, once);
+      el.addEventListener('focus',        function () { reveal(el); }, once);
+      el.addEventListener('touchstart',   function () { reveal(el); }, { once: true, passive: true });
+      // mousedown fires before click, so href is already upgraded by the time click triggers
+      el.addEventListener('mousedown',    function () { reveal(el); }, once);
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') reveal(el);
+      }, once);
     });
   })();
 </script>
 
 <style>
-  .obf-email {
-    cursor: pointer;
-  }
+  a.obf-email { cursor: pointer; }
 </style>
